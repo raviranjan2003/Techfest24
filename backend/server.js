@@ -17,6 +17,7 @@ import cookieParser from 'cookie-parser';
 import teamRouter from "./routes/teams.js";
 import authCoor from './routes/authCoor.js';
 import paymentRouter from './routes/payment.js';
+import { markAttendance, getTechbucks } from "./controllers/attendance.js";
 dotenv.config();
 const app = express();
 app.use(bodyParser.urlencoded({extended: false}));
@@ -47,6 +48,9 @@ app.use('/visitors', visitors);
 app.get("/", (req, res) => {
   res.send("Welcome! u have unlocked dev mode");
 });
+// app.post("/mark-attendance/:eventid/:userid", markAttendance);
+app.post("/mark-attendance/:userid", markAttendance);
+app.get("/get-techbucks/:userid", getTechbucks);
 app.use((req, res) => {
   res.status(404).render('404');
 }) 

@@ -119,6 +119,11 @@ const userSchema = new Schema(
         ref: "Workshop",
       },
     ],
+
+    techbucks : {
+      type: Number,
+      default: 10
+    },
   },
   { timestamps: true }
 );

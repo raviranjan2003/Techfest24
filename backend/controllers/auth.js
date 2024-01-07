@@ -44,9 +44,9 @@ const signUp = async(req, res) => {
   const refferalCode = req.body.referral;
   const eArr = req.body.email.split("@");
   const domain = eArr[1];
-  const userId = `#TF23-${crypto.randomBytes(3).toString("hex")}`;
+  const userId = `#TF24-${crypto.randomBytes(3).toString("hex")}`;
   const password = req.body.password;
-  const referralCode = `#TF23-` + crypto.randomBytes(3).toString("hex");
+  const referralCode = `#TF24-` + crypto.randomBytes(3).toString("hex");
 
   let payLoad;
   try {

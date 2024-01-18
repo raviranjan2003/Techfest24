@@ -130,12 +130,14 @@ const signUp = async(req, res) => {
 
   try {
     const token = crypto.randomBytes(32).toString("hex");
+    console.log("token ===>"+token);
     await authverifyToken({
       token: token,
       email: req.body.email,
     }).save();
 
-    const uri = `https://www.techfestsliet.org/api/auth/verifyUser/${token}`;
+    // const uri = `https://www.techfestsliet.org/api/auth/verifyUser/${token}`;
+    const uri = `http://localhost:4030/auth/verifyUser/${token}`;
 
     transporter.sendMail(
       {

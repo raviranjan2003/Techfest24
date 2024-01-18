@@ -7,7 +7,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
       trim: true,
-      maxLength: 30,
+      maxLength: 50,
     },
     dob: {
       type: Date,

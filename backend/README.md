@@ -3,7 +3,7 @@
 ## How to run?
 
 ```bash
-npm i 
+npm install
 ```
 - then
 ```bash

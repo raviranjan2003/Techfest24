@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-export const baseUrl = 'https://www.techfestsliet.org/api';
-// export const baseUrl = 'http://localhost:4000';
+// export const baseUrl = 'https://www.techfestsliet.org/api';
+export const baseUrl = 'http://127.0.0.1:4030';
 
-export const localUrlIns = axios.create({
+const localUrlIns = axios.create({
   baseURL: baseUrl,
   'withCredentials':true,
   headers: {
@@ -13,3 +13,5 @@ export const localUrlIns = axios.create({
     "Access-Control-Allow-Origin": "*",
   },
 });
+
+export default localUrlIns;

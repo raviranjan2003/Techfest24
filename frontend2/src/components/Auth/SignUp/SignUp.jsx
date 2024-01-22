@@ -4,73 +4,9 @@ import { Box, Modal, Stack, Button } from "@mui/material";
 import BackGrndImg from "../../../assets/earthfromspace.jpg";
 import axios from "axios";
 import { baseUrl } from "../../../API/Api";
+// import axios from "./../../../API/Api";
 
 import "./SignUp.css";
-
-const initialValues = {
-  name: "",
-  password: "",
-  confPassword: "",
-  number: "",
-  branch: "",
-  email: "",
-  collage: "",
-  birth: "",
-  wNumber: "",
-};
-const submitHandler = (values) => {
-  console.log(values);
-  // const submit = async (values)=>{
-  //   await axios
-  //   .post(`${baseUrl}/auth/sign-up`,values)
-  //   .then((result)=>{
-  //     const res = result;
-  //     console.log(res);
-  //   })
-  //   .catch((err)=>{
-  //     console.log(err);
-  //   })
-  // }
-  // submit(values);
-};
-
-const validate = (values) => {
-  const error = {};
-  if (!values.name) {
-    error.name = "Name is Required";
-  }
-  if (!values.email) {
-    error.email = "Email is required";
-  }
-  //add the email validation here
-
-  if (!values.dob) {
-    error.dob = "Required Feild";
-  }
-
-  if (!values.password) {
-    error.password = "Required Feild";
-  }
-  if (!values.confPassword) {
-    error.password = "Required Feild";
-  } else if (values.password !== values.confPassword) {
-    error.confPassword = "password must match";
-  }
-
-  if (!values.number) {
-    error.number = "Required Feild";
-  }
-
-  if (!values.wNumber) {
-    error.wNumber = "Required Feild";
-  }
-
-  if (!values.branch) {
-    error.branch = "Required Feild";
-  }
-
-  return error;
-};
 
 const branchArr = [
   " Aeronautical Engineering",
@@ -108,12 +44,74 @@ const branchArr = [
 ];
 
 const SignUp = () => {
+  const initialValues = {
+    name: "",
+    password: "",
+    confPassword: "",
+    number: "",
+    branch: "",
+    email: "",
+    collage: "",
+    birth: "",
+    wNumber: "",
+  };
+  const submitHandler = async (values) => {
+    console.log("inside submitHandler");
+    console.log("signup values", values);
+    await axios
+      .post(`${baseUrl}/auth/sign-up`, values)
+      .then((result) => {
+        const res = result;
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const validate = (values) => {
+    const error = {};
+    if (!values.name) {
+      error.name = "Name is Required";
+    }
+    if (!values.email) {
+      error.email = "Email is required";
+    }
+    //add the email validation here
+
+    if (!values.dob) {
+      error.dob = "Required Field";
+    }
+
+    if (!values.password) {
+      error.password = "Required Field";
+    }
+    if (!values.confPassword) {
+      error.password = "Required Field";
+    } else if (values.password !== values.confPassword) {
+      error.confPassword = "password must match";
+    }
+
+    if (!values.number) {
+      error.number = "Required Field";
+    }
+
+    if (!values.wNumber) {
+      error.wNumber = "Required Field";
+    }
+
+    if (!values.branch) {
+      error.branch = "Required Field";
+    }
+
+    return error;
+  };
   const formik = useFormik({
     initialValues: initialValues,
     onSubmit: submitHandler,
     validate: validate,
   });
-  console.log(formik.values);
+  // console.log(formik.values);
   const [page, setPage] = useState(1);
   // const [openModal, setOpenModal] = useState(true);
 
@@ -170,11 +168,15 @@ const SignUp = () => {
                 // border: "1px solid black",
               }}
             >
-              <h1>Hi</h1>
+              <h1>
+                Hi!{" "}
+                <span>
+                  <b>{formik.values.name.toUpperCase()}</b>
+                </span>{" "}
+              </h1>
               {/* corection needed */}
-              <span>{formik.values.name}</span>
             </Box>
-            <form onSubmit={formik.handleSubmit}>
+            <form onSubmit={submitHandler}>
               {page === 1 ? (
                 <>
                   <Box>
@@ -229,19 +231,6 @@ const SignUp = () => {
                       onBlur={formik.handleBlur}
                     />
                   </Box>
-                  {/* <Box>
-                    <label htmlFor="confPassword">Confirm Password</label>
-                    <input
-                      type="password"
-                      name="confPassword"
-                      id="confPassword"
-                      placeholder="confirm passoword"
-                      color="#03045E"
-                      autoComplete="off"
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                    />
-                  </Box> */}
                   <Box
                     className="nextBtn"
                     style={{
@@ -254,14 +243,18 @@ const SignUp = () => {
                     }}
                   >
                     <Button onClick={() => setPage(2)}>Next</Button>
+                    <Button type="submit" variant="contained">
+                      {" "}
+                      Submit
+                    </Button>
                   </Box>
                 </>
               ) : page === 2 ? (
                 <>
-                  <Box>
+                  {/* <Box>
                     <label htmlFor="number">Contact number</label>
                     <input
-                      type="text"
+                      type="number"
                       id="number"
                       name="number"
                       autoComplete="off"
@@ -273,7 +266,7 @@ const SignUp = () => {
                   <Box>
                     <label htmlFor="wNumber">What'sApp Number</label>
                     <input
-                      type="text"
+                      type="number"
                       id="wNumber"
                       name="wNumber"
                       autoComplete="off"
@@ -296,16 +289,14 @@ const SignUp = () => {
                   </Box>
                   <Box>
                     <label htmlFor="branch">Department</label>
-                    <input
-                      type="text"
-                      id="number"
-                      name="number"
-                      autoComplete="off"
-                      placeholder="Department"
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                    />
-                  </Box>
+                    <select name="branch" id="branch">
+                      {branchArr.map((branch, i) => (
+                        <option value={i} key={i}>
+                          {branch}
+                        </option>
+                      ))}
+                    </select>
+                  </Box> */}
                   <Box
                     style={{
                       width: "55%",
@@ -316,13 +307,23 @@ const SignUp = () => {
                     }}
                   >
                     <Button onClick={() => setPage(1)}>Back</Button>
-                    <Button type="submit" variant="contained">
-                      {" "}
-                      Submit
-                    </Button>
                   </Box>
                 </>
               ) : null}
+
+              {/* <Box>
+                <label htmlFor="confPassword">Confirm Password</label>
+                <input
+                type="password"
+                name="confPassword"
+                id="confPassword"
+                placeholder="confirm passoword"
+                color="#03045E"
+                autoComplete="off"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                />
+              </Box> */}
             </form>
           </Stack>
         </Box>

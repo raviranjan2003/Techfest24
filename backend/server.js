@@ -1,5 +1,6 @@
 connectDB();
 import express from "express";
+import helmet from "helmet";
 import cors from "cors";
 import colors from "colors";
 import dotenv from "dotenv";
@@ -32,6 +33,15 @@ app.use(cors(corsOptions));
 app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(cookieParser());
+
+// app.use((req, res, next) => {
+//   res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' https://apis.google.com");
+//   next();
+// }); 
+
+// app.use(helmet({
+//   contentSecurityPolicy: false,      
+// }));
 
 app.use("/auth", authRoutes);
 app.use('/user', userRoutes);

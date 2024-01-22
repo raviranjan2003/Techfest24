@@ -1,0 +1,1 @@
+script-src 'self' 'wasm-unsafe-eval' 'inline-speculation-rules' https://apis.google.com;

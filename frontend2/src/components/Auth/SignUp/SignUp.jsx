@@ -48,14 +48,16 @@ const SignUp = () => {
     name: "",
     password: "",
     confPassword: "",
-    number: "",
+    phone: "",
     branch: "",
     email: "",
     collage: "",
     birth: "",
     wNumber: "",
+    
   };
-  const submitHandler = async (values) => {
+  const submitHandler = async (e,values) => {
+    e.preventDefault();
     console.log("inside submitHandler");
     console.log("signup values", values);
     await axios
@@ -176,7 +178,7 @@ const SignUp = () => {
               </h1>
               {/* corection needed */}
             </Box>
-            <form onSubmit={submitHandler}>
+            <form onSubmit={(e) => submitHandler(e,formik.values)}>
               {page === 1 ? (
                 <>
                   <Box>
@@ -225,6 +227,19 @@ const SignUp = () => {
                       name="password"
                       id="password"
                       placeholder="password"
+                      color="#03045E"
+                      autoComplete="off"
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                    />
+                  </Box>
+                  <Box>
+                    <label htmlFor="password">phone</label>
+                    <input
+                      type="number"
+                      name="number"
+                      id="number"
+                      placeholder="phone"
                       color="#03045E"
                       autoComplete="off"
                       onChange={formik.handleChange}

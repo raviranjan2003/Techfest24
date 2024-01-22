@@ -178,7 +178,9 @@ const SignUp = () => {
               </h1>
               {/* corection needed */}
             </Box>
+
             <form onSubmit={(e) => submitHandler(e,formik.values)}>
+
               {page === 1 ? (
                 <>
                   <Box>

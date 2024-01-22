@@ -55,7 +55,8 @@ const SignUp = () => {
     birth: "",
     wNumber: "",
   };
-  const submitHandler = async (values) => {
+  const submitHandler = async (e,values) => {
+    e.preventDefault();
     console.log("inside submitHandler");
     console.log("signup values", values);
     await axios
@@ -176,7 +177,7 @@ const SignUp = () => {
               </h1>
               {/* corection needed */}
             </Box>
-            <form onSubmit={submitHandler}>
+            <form onSubmit={(e)=>submitHandler(e,formik.values)}>
               {page === 1 ? (
                 <>
                   <Box>

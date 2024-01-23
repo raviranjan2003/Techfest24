@@ -5,6 +5,7 @@ import BackGrndImg from "../../../assets/earthfromspace.jpg";
 import axios from "axios";
 import { baseUrl } from "../../../API/Api";
 // import axios from "./../../../API/Api";
+import {useNavigate} from "react-router-dom";
 
 import "./SignUp.css";
 
@@ -56,6 +57,9 @@ const SignUp = () => {
     wNumber: "",
     
   };
+
+  const navigate = useNavigate();
+
   const submitHandler = async (e,values) => {
     e.preventDefault();
     console.log("inside submitHandler");
@@ -235,19 +239,6 @@ const SignUp = () => {
                       onBlur={formik.handleBlur}
                     />
                   </Box>
-                  <Box>
-                    <label htmlFor="password">phone</label>
-                    <input
-                      type="number"
-                      name="number"
-                      id="number"
-                      placeholder="phone"
-                      color="#03045E"
-                      autoComplete="off"
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                    />
-                  </Box>
                   <Box
                     className="nextBtn"
                     style={{
@@ -260,15 +251,12 @@ const SignUp = () => {
                     }}
                   >
                     <Button onClick={() => setPage(2)}>Next</Button>
-                    <Button type="submit" variant="contained">
-                      {" "}
-                      Submit
-                    </Button>
+                    
                   </Box>
                 </>
               ) : page === 2 ? (
                 <>
-                  {/* <Box>
+                  <Box>
                     <label htmlFor="number">Contact number</label>
                     <input
                       type="number"
@@ -313,7 +301,7 @@ const SignUp = () => {
                         </option>
                       ))}
                     </select>
-                  </Box> */}
+                  </Box>
                   <Box
                     style={{
                       width: "55%",
@@ -324,6 +312,10 @@ const SignUp = () => {
                     }}
                   >
                     <Button onClick={() => setPage(1)}>Back</Button>
+                    <Button type="submit" variant="contained">
+                      {" "}
+                      Submit
+                    </Button>
                   </Box>
                 </>
               ) : null}

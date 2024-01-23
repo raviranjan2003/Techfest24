@@ -5,6 +5,7 @@ import BackGrndImg from "../../../assets/earthfromspace.jpg";
 import axios from "axios";
 import { baseUrl } from "../../../API/Api";
 // import axios from "./../../../API/Api";
+import {useNavigate} from "react-router-dom";
 
 import "./SignUp.css";
 
@@ -48,13 +49,17 @@ const SignUp = () => {
     name: "",
     password: "",
     confPassword: "",
-    number: "",
+    phone: "",
     branch: "",
     email: "",
     collage: "",
     birth: "",
     wNumber: "",
+    
   };
+
+  const navigate = useNavigate();
+
   const submitHandler = async (e,values) => {
     e.preventDefault();
     console.log("inside submitHandler");
@@ -177,7 +182,9 @@ const SignUp = () => {
               </h1>
               {/* corection needed */}
             </Box>
-            <form onSubmit={(e)=>submitHandler(e,formik.values)}>
+
+            <form onSubmit={(e) => submitHandler(e,formik.values)}>
+
               {page === 1 ? (
                 <>
                   <Box>
@@ -244,15 +251,12 @@ const SignUp = () => {
                     }}
                   >
                     <Button onClick={() => setPage(2)}>Next</Button>
-                    <Button type="submit" variant="contained">
-                      {" "}
-                      Submit
-                    </Button>
+                    
                   </Box>
                 </>
               ) : page === 2 ? (
                 <>
-                  {/* <Box>
+                  <Box>
                     <label htmlFor="number">Contact number</label>
                     <input
                       type="number"
@@ -297,7 +301,7 @@ const SignUp = () => {
                         </option>
                       ))}
                     </select>
-                  </Box> */}
+                  </Box>
                   <Box
                     style={{
                       width: "55%",
@@ -308,6 +312,10 @@ const SignUp = () => {
                     }}
                   >
                     <Button onClick={() => setPage(1)}>Back</Button>
+                    <Button type="submit" variant="contained">
+                      {" "}
+                      Submit
+                    </Button>
                   </Box>
                 </>
               ) : null}

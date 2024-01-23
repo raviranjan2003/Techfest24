@@ -25,7 +25,6 @@ const signUp = async(req, res) => {
   //     isError: true,
   //   });
   // }
-
   if (await User.findOne({ email: req.body.email })) {
     return res.status(208).send({
       title: "Error",
@@ -33,7 +32,6 @@ const signUp = async(req, res) => {
       isError: true,
     });
   }
-
   if (await User.findOne({ phone: req.body.phone })) {
     return res.status(208).send({
       title: "Error",
@@ -135,8 +133,8 @@ const signUp = async(req, res) => {
       email: req.body.email,
     }).save();
 
-    const uri = `https://www.techfestsliet.org/api/auth/verifyUser/${token}`;
-    // const uri = `http://localhost:4030/auth/verifyUser/${token}`;
+    // const uri = `https://www.techfestsliet.org/api/auth/verifyUser/${token}`;
+    const uri = `http://localhost:4030/auth/verifyUser/${token}`;
 
     transporter.sendMail(
       {

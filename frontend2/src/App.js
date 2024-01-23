@@ -55,11 +55,6 @@ function App() {
         <Route path="/forget-password" element={<ForgetPassword />} />
         <Route path="/verify" element={<EmailVerify />} />
 
-        {/* <Route path="/domain" element={<Domains/>} />
-        <Route path="/events" element={<Events />} />
-        <Route path="/events/:id" element={<EventsDetailed />} />
-        <Route path="/event" element={<Event/>}/> */}
-
         {!authContext.isUserLoggedIn && (
           <Route path="/user-dashboard" element={<UserDashBoard />} />
         )}
@@ -67,9 +62,6 @@ function App() {
         {!authContext.isUserLoggedIn && (
           <Route path="/register" element={<RegisterEvent />} />
         )}
-
-        {/* <Route path="/add-team" element={<AddTeam />} />
-        <Route path="/team" element={<Team />} /> */}
         
         {!authContext.isUserLoggedIn && (
           <Route path="/update-user" element={<UpdateUser />} />
